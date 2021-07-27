@@ -2,8 +2,6 @@ import cv2
 import mediapipe as mp
 import time
 
-
-
 class handDetector():
     def __init__(self,
                  mode = False,
@@ -22,7 +20,7 @@ class handDetector():
                                         self.trackConfidence)
         self.mpDraw = mp.solutions.drawing_utils
 
-    def findHands(self, img, draw = True):
+    def landmarkPositions(self, img, draw = True):
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         results = self.hands.process(imgRGB)
         lmList = []
@@ -32,4 +30,4 @@ class handDetector():
                     height, width, channel = img.shape  # height and width of window
                     cx, cy = int(lm.x * width), int(lm.y * height)  # landmaarks coordinates
                     lmList.append((id, cx, cy))
-        return lmList
+            return lmList
